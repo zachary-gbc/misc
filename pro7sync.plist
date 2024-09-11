@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>pro7.backup</string>
+	<key>Program</key>
+	<string>/Users/techd/Documents/GitHub/misc/pro7sync.sh</string>
+    <key>StartInterval</key>
+    <integer>1800</integer>
+	<key>StandardOutPath</key>
+	<string>/Users/techd/Documents/logs/pro7sync.stdout</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/techd/Documents/logs/pro7sync.stderr</string>
+</dict>
+</plist>
