@@ -6,11 +6,20 @@
 	<string>pro7.backup</string>
 	<key>Program</key>
 	<string>/Users/techd/Documents/GitHub/misc/pro7backup.sh</string>
-    <key>StartInterval</key>
-    <integer>1800</integer>
+	<key>StartCalendarInterval</key>
+		<array>
+			<dict>
+				<key>Minute</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>Minute</key>
+				<integer>30</integer>
+			</dict>
+		</array>
 	<key>StandardOutPath</key>
-	<string>/Users/techd/Documents/logs/pro7backup.stdout</string>
-  <key>StandardErrorPath</key>
-  <string>/Users/techd/Documents/logs/pro7backup.stderr</string>
+	<string>/Users/techd/Documents/logs/pro7backupout.txt</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/techd/Documents/logs/pro7backuperr.txt</string>
 </dict>
 </plist>

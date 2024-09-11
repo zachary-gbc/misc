@@ -8,6 +8,8 @@ fi
 host=$(hostname -s)
 user=""
 
+exit 1
+
 case $host in
   "Sanctuary-Media")
     user="media"
