@@ -5,7 +5,7 @@
 	<key>Label</key>
 	<string>pro7.backup</string>
 	<key>Program</key>
-	<string>/Users/techd/Documents/GitHub/misc/pro7sync.sh</string>
+	<string>/Users/techd/Documents/scripts/pro7sync.sh</string>
 	<key>StartCalendarInterval</key>
 		<array>
 			<dict>

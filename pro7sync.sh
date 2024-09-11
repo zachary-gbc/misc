@@ -7,6 +7,8 @@ then
 fi
 host=$(hostname -s)
 user=""
+logdatetime=$(date +%F_%H:%M:%S)
+echo "$logdatetime - Sync Script Started"
 
 exit 1
 
@@ -32,7 +34,7 @@ thm_sync="/Users/$user/Sync/ProPresenter_Shared_Content/Themes/"
 
 if [ $user == "" ]
 then
-  echo "Unable to Run Due to Host Not Setup Correctly in Script"
+  echo "$logdatetime - Host Not Setup Correctly in Script"
   exit 1
 fi
 

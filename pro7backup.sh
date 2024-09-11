@@ -11,8 +11,8 @@ daybackup=$(date +%A)
 backupfolder="temp"
 user=""
 lastbackupday="never"
-logdatetime=$(date -I)
-echo "$date - Backup Script Started"
+logdatetime=$(date +%F_%H:%M:%S)
+echo "$logdatetime - Backup Script Started"
 
 case $host in
   "Sanctuary-Media")
@@ -44,13 +44,13 @@ lastbackupday=$(</Users/$user/Sync/ProPresenter_Backups/$backupfolder/lastbackup
 
 if [ $user == "" ]
 then
-  echo "$date - Host Not Setup Correctly in Script"
+  echo "$logdatetime - Host Not Setup Correctly in Script"
   exit 1
 fi
 
 if [ "$daybackup" == "" ]
 then
-  echo "$date - Day Not Set"
+  echo "$logdatetime - Day Not Set"
   exit 1
 fi
 
@@ -58,7 +58,7 @@ if [ "$lastbackupday" == "$daybackup" ]
 then
   if [ "$manual" != "manualbackupnow" ]
   then
-    echo "$date - Backup Alreday Completed for Today"
+    echo "$logdatetime - Backup Alreday Completed for Today"
     exit 1
   fi
 fi
@@ -78,4 +78,4 @@ then
 fi
 
 echo $daybackup > /Users/$user/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt
-echo "$date - Backup Complete"
+echo "$logdatetime - Backup Complete"
