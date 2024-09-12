@@ -5,7 +5,7 @@
 	<key>Label</key>
 	<string>pro7.backup</string>
 	<key>Program</key>
-	<string>/Users/techd/Documents/scripts/pro7sync.sh</string>
+	<string>/Users/techd/Documents/Scripts/pro7sync.sh</string>
 	<key>StartCalendarInterval</key>
 		<array>
 			<dict>
@@ -18,8 +18,8 @@
 			</dict>
 		</array>
 	<key>StandardOutPath</key>
-	<string>/Users/techd/Documents/logs/pro7syncout.txt</string>
+	<string>/Users/techd/Documents/Scripts/logs/pro7syncout.txt</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/techd/Documents/logs/pro7syncerr.txt</string>
+	<string>/Users/techd/Documents/Scripts/logs/pro7syncerr.txt</string>
 </dict>
 </plist>

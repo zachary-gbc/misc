@@ -58,7 +58,7 @@ if [ "$lastbackupday" == "$daybackup" ]
 then
   if [ "$manual" != "manualbackupnow" ]
   then
-    echo "$logdatetime - Backup Alreday Completed for Today"
+    echo "$logdatetime - Backup Already Completed for Today"
     exit 1
   fi
 fi
