@@ -1,18 +1,18 @@
 #!/bin/bash
 
 processnumber=$(ps aux | grep -v grep | grep -ci "ProPresenter")
-if [ $processnumber != 0 ]
-then
-  exit 1
-fi
-manual=$1
+logdatetime=$(date +%F_%H:%M:%S)
 host=$(hostname -s)
 daybackup=$(date +%A)
-backupfolder="temp"
-user=""
 lastbackupday="never"
-logdatetime=$(date +%F_%H:%M:%S)
-echo "$logdatetime - Backup Script Started"
+
+if [ $processnumber == 0 ] || [ $1 == "manualbackup" ] 
+then
+  echo "$logdatetime - Backup Script Started"
+else
+  echo "$logdatetime - Backup Script Not Started, ProPresenter Running"
+  exit 1
+fi
 
 case $host in
   "Sanctuary-Media")
@@ -63,7 +63,7 @@ then
   fi
 fi
 
-echo "$date - Running Backup Now for $daybackup";
+echo "$logdatetime - Running Backup Now for $daybackup";
 rm -rf /Users/$user/Sync/ProPresenter_Backups/$backupfolder/$daybackup/*
 
 for foldername in Configuration Downloads Libraries Playlists Presets Themes; do

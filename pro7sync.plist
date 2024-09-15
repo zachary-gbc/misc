@@ -10,16 +10,16 @@
 		<array>
 			<dict>
 				<key>Minute</key>
-				<integer>0</integer>
+				<integer>5</integer>
 			</dict>
 			<dict>
 				<key>Minute</key>
-				<integer>30</integer>
+				<integer>35</integer>
 			</dict>
 		</array>
 	<key>StandardOutPath</key>
-	<string>/Users/techd/Documents/Scripts/logs/pro7syncout.txt</string>
+	<string>/Users/techd/Sync/ProPresenter_Backups/ZF_Laptop/pro7sync_log.txt</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/techd/Documents/Scripts/logs/pro7syncerr.txt</string>
+	<string>/Users/techd/Sync/ProPresenter_Backups/ZF_Laptop/pro7sync_errlog.txt</string>
 </dict>
 </plist>
