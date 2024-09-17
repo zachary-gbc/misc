@@ -34,4 +34,3 @@ rsync -qrtu $thm_sync $thm_local
 rsync -qrtu $font_local $font_sync
 rsync -qrtu $font_sync $font_local
 echo "Sync Complete"
-# rsync -qrt --delete?  #unsure on how/where to add delete, need to test that
