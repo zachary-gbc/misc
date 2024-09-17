@@ -19,18 +19,11 @@ else
   exit 1
 fi
 
-lib_local="~/Documents/ProPresenter/Libraries/"
-lib_sync="~/Sync/ProPresenter_Shared_Content/Libraries/"
-thm_local="~/Documents/ProPresenter/Themes/"
-thm_sync="~/Sync/ProPresenter_Shared_Content/Themes/"
-font_local="~/Library/Fonts/"
-font_sync="~/Sync/ProPresenter_Shared_Content/Fonts/"
-
 echo "Running Sync Now";
-rsync -qrtu --exclude="LibraryData" --exclude Old_Songs $lib_local $lib_sync
-rsync -qrtu --exclude="LibraryData" --exclude Old_Songs $lib_sync $lib_local
-rsync -qrtu $thm_local $thm_sync
-rsync -qrtu $thm_sync $thm_local
-rsync -qrtu $font_local $font_sync
-rsync -qrtu $font_sync $font_local
+rsync -qrtu --exclude="LibraryData" --exclude Old_Songs ~/Documents/ProPresenter/Libraries/ ~/Sync/ProPresenter_Shared_Content/Libraries/
+rsync -qrtu --exclude="LibraryData" --exclude Old_Songs ~/Sync/ProPresenter_Shared_Content/Libraries/ ~/Documents/ProPresenter/Libraries/
+rsync -qrtu ~/Documents/ProPresenter/Themes/ ~/Sync/ProPresenter_Shared_Content/Themes/
+rsync -qrtu ~/Sync/ProPresenter_Shared_Content/Themes/ ~/Documents/ProPresenter/Themes/
+rsync -qrtu ~/Library/Fonts/ ~/Sync/ProPresenter_Shared_Content/Fonts/
+rsync -qrtu ~/Sync/ProPresenter_Shared_Content/Fonts/ ~/Library/Fonts/
 echo "Sync Complete"

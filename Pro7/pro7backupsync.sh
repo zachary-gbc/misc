@@ -6,12 +6,16 @@ host=$(hostname -s)
 daybackup=$(date +%A)
 lastbackupday="never"
 skipbackup=0
+skipsync=0
+$logmessage=""
 
-if [ $processnumber == 0 ] || [ "$1" == "manualbackup" ] 
+echo "$logdatetime - Backup & Sync Script Started"
+
+if [ $processnumber == 0 ] || [ "$1" == "manual" ] 
 then
-  echo "$logdatetime - Backup Script Started"
+  skipbackup=0
 else
-  echo "$logdatetime - Backup Not Run, ProPresenter Running"
+  echo "$logdatetime - Backup Skipped, ProPresenter Running"
   skipbackup=1
 fi
 
@@ -37,15 +41,9 @@ case $host in
 esac
 lastbackupday=$(<~/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt)
 
-if [ "$daybackup" == "" ] && [ $skipbackup == 0 ]
-then
-  echo "$logdatetime - Day Not Set"
-  skipbackup=1
-fi
-
 if [ "$lastbackupday" == "$daybackup" ] && [ $skipbackup == 0 ]
 then
-  if [ "$manual" != "manualbackupnow" ]
+  if [ "$1" != "manual" ]
   then
     echo "$logdatetime - Backup Already Completed for Today"
     skipbackup=1
@@ -72,4 +70,26 @@ then
   echo "$logdatetime - Backup Complete"
 fi
 
-bash ~/Documents/Scripts/pro7sync.sh
+# Sync Script
+if [ $processnumber == 0 ] || [ "$1" == "manual" ]
+then
+  if [ "$daybackup" == "Sunday" ] && [ "$1" != "manual" ]
+  then
+    echo "$logdatetime - Sync Not Started, Not Automatic on Sunday"
+    skipsync=1
+  fi
+else
+  skipsync=1
+fi
+
+if [ $skipsync == 0 ]
+then
+  echo "Running Sync Now";
+  rsync -qrtu --exclude="LibraryData" --exclude Old_Songs ~/Documents/ProPresenter/Libraries/ ~/Sync/ProPresenter_Shared_Content/Libraries/
+  rsync -qrtu --exclude="LibraryData" --exclude Old_Songs ~/Sync/ProPresenter_Shared_Content/Libraries/ ~/Documents/ProPresenter/Libraries/
+  rsync -qrtu ~/Documents/ProPresenter/Themes/ ~/Sync/ProPresenter_Shared_Content/Themes/
+  rsync -qrtu ~/Sync/ProPresenter_Shared_Content/Themes/ ~/Documents/ProPresenter/Themes/
+  rsync -qrtu ~/Library/Fonts/ ~/Sync/ProPresenter_Shared_Content/Fonts/
+  rsync -qrtu ~/Sync/ProPresenter_Shared_Content/Fonts/ ~/Library/Fonts/
+  echo "Sync Complete"
+fi
