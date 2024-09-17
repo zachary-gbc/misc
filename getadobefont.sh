@@ -3,7 +3,7 @@
 # Location here: https://youtu.be/yPvsbHqPIdQ
 # mdls command to use: mdls -n com_apple_ats_name_full -n kMDItemFSName <filename>
 
-cd /Users/$USER/Library/Application\ Support/Adobe/CoreSync/plugins/livetype
+cd ~/Library/Application\ Support/Adobe/CoreSync/plugins/livetype
 
 shopt -s nullglob dotglob
 mainfolderlist=(*)
@@ -15,9 +15,9 @@ for ((x=0; x<${#mainfolderlist[@]}; x++))
 do
   if [ ${mainfolderlist[$x]} != ".DS_Store" ]
   then
-    if [[ -d /Users/$USER/Library/Application\ Support/Adobe/CoreSync/plugins/livetype/${mainfolderlist[$x]} ]]
+    if [[ -d ~/Library/Application\ Support/Adobe/CoreSync/plugins/livetype/${mainfolderlist[$x]} ]]
     then
-      cd /Users/$USER/Library/Application\ Support/Adobe/CoreSync/plugins/livetype/${mainfolderlist[$x]}
+      cd ~/Library/Application\ Support/Adobe/CoreSync/plugins/livetype/${mainfolderlist[$x]}
       
       shopt -s nullglob dotglob
       subfolderlist=(*)

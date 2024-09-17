@@ -18,8 +18,8 @@
 			</dict>
 		</array>
 	<key>StandardOutPath</key>
-	<string>/Users/techd/Sync/ProPresenter_Backups/ZF_Laptop/pro7backup_log.txt</string>
+	<string>/Users/techd/Sync/ProPresenter_Shared_Content/Logs/ZF_Laptop_pro7backup_log.txt</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/techd/Sync/ProPresenter_Backups/ZF_Laptop/pro7backup_errlog.txt</string>
+	<string>/Users/techd/Sync/ProPresenter_Shared_Content/Logs/ZF_Laptop_pro7backup_errlog.txt</string>
 </dict>
 </plist>
