@@ -1,6 +1,6 @@
 # Pro7 Backup and Sync Scripts
 1. Ensure Sync is running on computer, root folder is ~/Sync, and correct folders are being syncronized locally
-1. Copy pro7backup.sh, pro7sync.sh, and pro7scripts.sh to ~/Documents/Scripts folder
+1. Copy pro7backup.sh, pro7sync.sh, pro7deletes.sh, and pro7scripts.sh to ~/Documents/Scripts folder
 1. Open terminal and type: chmod +x ~/Documents/Scripts/pro7*.sh
 1. Open System Settings, go to Privacy & Security, Full Disk Access
 1. Click plus sign at the bottom and add in /bin/bash
