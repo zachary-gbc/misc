@@ -15,7 +15,7 @@ for foldername in Configuration Downloads Libraries Playlists Presets Themes; do
   rsync -qrtu ~/Documents/ProPresenter/$foldername/ ~/Sync/ProPresenter_Backups/$backupfolder/$currentday/$foldername/
 done 
 
-if [[ $currentday == "Monday" ]]
+if [[ $currentday == "Tuesday" ]]
 then
   mkdir -p ~/Sync/ProPresenter_Backups/$backupfolder/Media/
   rsync -qrtu --delete ~/Documents/ProPresenter/Media/ ~/Sync/ProPresenter_Backups/$backupfolder/Media/
