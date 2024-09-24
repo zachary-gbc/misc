@@ -4,6 +4,7 @@
 # mdls command to use: mdls -n com_apple_ats_name_full -n kMDItemFSName <filename>
 
 cd ~/Library/Application\ Support/Adobe/CoreSync/plugins/livetype
+rm -f ~/Documents/Scripts/Fonts/*
 
 shopt -s nullglob dotglob
 mainfolderlist=(*)
@@ -23,21 +24,39 @@ do
       subfolderlist=(*)
       for ((y=0; y<${#subfolderlist[@]}; y++))
       do
-        fullname=$(mdls -n com_apple_ats_name_full ${subfolderlist[$y]})
-        filename=$(mdls -n kMDItemFSName ${subfolderlist[$y]})
-
-        full=${fullname#*'='}
-        full=${full%'"'*}
-        file=${filename#*'"'}
-        file=${file%'"'*}
-
-        allfiles[$z]="${mainfolderlist[$x]}/$file"
-        allnames[$z]=$full
-        ((z++))
+        file=${subfolderlist[$y]}
+        if [[ ${file: -4} == ".otf" ]]
+        then
+          cp ~/Library/Application\ Support/Adobe/CoreSync/plugins/livetype/${mainfolderlist[$x]}/$file ~/Documents/Scripts/Fonts/${file:1}
+        fi
       done
     fi
   fi
 done
+
+cd ~/Documents/Scripts/Fonts
+shopt -s nullglob dotglob
+newlist=(*)
+for ((y=0; y<${#newlist[@]}; y++))
+do
+  fullname=$(mdls -n com_apple_ats_name_full ${newlist[$y]})
+  filename=$(mdls -n kMDItemFSName ${newlist[$y]})
+
+  fullname=${fullname//$'\n'/}
+  full=${fullname#*'='}
+  full=${full:7}
+  full=${full%'"'*}
+  file=${filename#*'"'}
+  file=${file%'"'*}
+
+  if [[ ${file: -4} == ".otf" ]]
+  then
+    allfiles[$z]="$file"
+    allnames[$z]=$full
+    ((z++))
+  fi
+done
+
 
 if [ ${#allfiles[@]} == 0 ]
 then
@@ -46,7 +65,8 @@ else
   echo "All Fonts:"
   for ((x=0; x<$z; x++))
   do
-    echo "$z = ${allfiles[$x]} - ${allnames[$x]}"
+    newfilename="${allfiles[$x]}                "
+    echo "${newfilename:0:9} - ${allnames[$x]}"
   done
 fi
 
