@@ -17,6 +17,7 @@ backupalreadyrun="no"
 lastbackupday="never"
 prorunning="yes"
 machinebackup="no"
+machineset="no"
 
 while read line; do
   IFS=' || ' read -ra items <<< "$line"
@@ -25,9 +26,15 @@ while read line; do
     backupfolder=${items[2]}
     machinebackup=${items[4]}
     syncdirection=${items[6]}
+    machineset="no"
   fi
 done <~/Sync/ProPresenter_Shared_Content/machines.txt
 
+if [[ $machineset == "no" ]]
+then
+  echo "Machine Not Setup in File"
+  exit 1
+fi
 if [[ $processnumber == 0 ]]; then prorunning="no"; fi
 
 if [[ $machinebackup == "yes" ]]
