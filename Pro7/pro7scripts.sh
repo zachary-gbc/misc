@@ -5,7 +5,7 @@ host=$(hostname -s)
 echo "$logdatetime - Pro7 Scripts Started"
 
 processnumber=$(ps aux | grep -v grep | grep -ci "ProPresenter")
-currentday=$(date +%A)
+currentdate=$(date +%F)
 manual=$1 # options: manual, manualbackup, manualsync
 syncdirection="none" # options: up, down, both
 runbackup="no"
@@ -32,8 +32,8 @@ if [[ $processnumber == 0 ]]; then prorunning="no"; fi
 
 if [[ $machinebackup == "yes" ]]
 then
-  lastbackupday=$(<~/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt)
-  if [[ $lastbackupday == $currentday ]]; then backupalreadyrun="yes"; fi
+  lastbackupdate=$(<~/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt)
+  if [[ $lastbackupdate == $currentdate ]]; then backupalreadyrun="yes"; fi
 
   if [[ $manual == "manual" ]] || [[ $manual == "manualbackup" ]]
   then

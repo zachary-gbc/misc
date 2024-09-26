@@ -5,6 +5,7 @@
 
 logdatetime=$(date +%F_%H:%M:%S)
 currentday=$(date +%A)
+currentdate=$(date +%F)
 backupfolder=$2
 
 echo "$logdatetime - Running Backup for $currentday";
@@ -21,5 +22,5 @@ then
   rsync -qrtu --delete ~/Documents/ProPresenter/Media/ ~/Sync/ProPresenter_Backups/$backupfolder/Media/
 fi
 
-echo $currentday > ~/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt
+echo $currentdate > ~/Sync/ProPresenter_Backups/$backupfolder/lastbackupday.txt
 echo "$logdatetime - Backup Complete"
