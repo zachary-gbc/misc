@@ -4,46 +4,33 @@ logdatetime=$(date +%F_%H:%M:%S)
 
 echo "$logdatetime - Running Deletes Now";
 
-while read line; do
-  if [[ $line != "" ]]
-  then
-    if [[ ${line:0:1} != "#" ]]
-    then
-      local_item="${HOME}/Library/Fonts/$line"
-      sync_item="${HOME}/Sync/ProPresenter_Shared_Content/Fonts/$line"
-      rm -rf "$local_item"
-      rm -rf "$sync_item"
-      echo "Removed: $line"
-    fi
-  fi
-done <~/Sync/ProPresenter_Shared_Content/Deletes/fonts.txt
+declare -a areas=("Libraries" "Themes" "Fonts")
 
-while read line; do
-  if [[ $line != "" ]]
-  then
-    if [[ ${line:0:1} != "#" ]]
+for area in "${areas[@]}"
+do
+  while read line; do
+    if [[ $line != "" ]]
     then
-      local_item="${HOME}/Documents/ProPresenter/Themes/$line"
-      sync_item="${HOME}/Sync/ProPresenter_Shared_Content/Themes/$line"
-      rm -rf "$local_item"
-      rm -rf "$sync_item"
-      echo "Removed: $line"
-    fi
-  fi
-done <~/Sync/ProPresenter_Shared_Content/Deletes/themes.txt
+      if [[ ${line:0:1} != "#" ]]
+      then
+        exists="no"
+        local_item="${HOME}/Documents/ProPresenter/$area/$line"
+        sync_item="${HOME}/Sync/ProPresenter_Shared_Content/$area/$line"
+        mv_path="${HOME}/Sync/ProPresenter_Shared_Content/Deletes/$area/$line"
 
-while read line; do
-  if [[ $line != "" ]]
-  then
-    if [[ ${line:0:1} != "#" ]]
-    then
-      local_item="${HOME}/Documents/ProPresenter/Libraries/$line"
-      sync_item="${HOME}/Sync/ProPresenter_Shared_Content/Libraries/$line"
-      rm -rf "$local_item"
-      rm -rf "$sync_item"
-      echo "Removed: $line"
+        if [[ -d "$local_item" ]] || [[ -f "$local_item" ]]; then exists="yes"; fi
+
+        if [[ $exists == "yes" ]]
+        then
+          directory=${mv_path%/*}
+          mkdir -p "$directory"
+          mv -f "$local_item" "$mv_path"
+          rm -rf "$sync_item"
+          echo "Removed: $line"
+        fi
+      fi
     fi
-  fi
-done <~/Sync/ProPresenter_Shared_Content/Deletes/libraries.txt
+  done <~/Sync/ProPresenter_Shared_Content/Deletes/$area.txt
+done
 
 echo "$logdatetime - Deletes Complete"
