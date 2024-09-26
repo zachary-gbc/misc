@@ -26,7 +26,7 @@ while read line; do
     backupfolder=${items[2]}
     machinebackup=${items[4]}
     syncdirection=${items[6]}
-    machineset="no"
+    machineset="yes"
   fi
 done <~/Sync/ProPresenter_Shared_Content/machines.txt
 
