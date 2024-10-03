@@ -32,7 +32,7 @@ done <~/Sync/ProPresenter_Shared_Content/machines.txt
 
 if [[ $machineset == "no" ]]
 then
-  echo "Machine Not Setup in File"
+  echo "Machine ($host) Not Setup in File"
   exit 1
 fi
 if [[ $processnumber == 0 ]]; then prorunning="no"; fi
