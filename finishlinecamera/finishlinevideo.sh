@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Links:
-# https://openapi.propresenter.com/#/Presentation/presentationFocusedPreviousTrigger
-# https://shotstack.io/learn/ffmpeg-speed-up-video-slow-down-videos/
-
 # variables
 obsfolder="/Users/username/Movies/GrandPrix"
 outputfolder="/Users/username/Desktop/GrandPrixVideos/"
