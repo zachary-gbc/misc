@@ -10,7 +10,7 @@ endvideolength=$(($secondstokeep * $slowdownspeed))
 pro7ipaddress="1.1.1.1"
 pro7port="50001"
 testing=false
-increment=0
+increment=1
 x=0
 
 cd $obsfolder
@@ -47,12 +47,12 @@ do
         if [ $videotrim -gt 60 ]
         then
           echo "Unable to trim videos longer than 60 seconds"
-          cp $obsfolder$file $outputfolder$increment-trimmed.mp4
+          cp $file $outputfolder$increment-trimmed.mp4
       else
           ffmpeg -y -ss 00:00:$videotrim -i $file -c:v copy -c:a copy $outputfolder$increment-trimmed.mp4
         fi
       else
-        cp $obsfolder$file $outputfolder$increment-trimmed.mp4
+        cp $file $outputfolder$increment-trimmed.mp4
       fi
       mv $file $outputfolder$increment-original.mp4
       ffmpeg -y -i $outputfolder$increment-trimmed.mp4 -filter:v "setpts=$slowdownspeed*PTS" -an $outputfolder$increment.mp4
@@ -61,6 +61,8 @@ do
       sleep $endvideolength
       sleep 1
       curl "http://$pro7ipaddress:$pro7port/v1/presentation/focused/previous/trigger"
+      echo "Finished #$increment"
+      echo $increment > "${outputfolder}latest"
     fi
   done
 done
