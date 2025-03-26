@@ -4,13 +4,13 @@
 obsfolder="/Users/username/Movies/GrandPrix"
 outputfolder="/Users/username/Desktop/GrandPrixVideos/"
 secondstosleep=2
-secondstokeep=5
-slowdownspeed=2
-endvideolength=$(($secondstokeep * $slowdownspeed))
+secondstokeep=1
+slowdownspeed=3
+endvideolength=$(($secondstokeep * $slowdownspeed + 1))
 pro7ipaddress="1.1.1.1"
 pro7port="50001"
 testing=false
-increment=1
+iteration=1
 x=0
 
 cd $obsfolder
@@ -32,8 +32,8 @@ do
     if [ $testing = "true" ]; then echo "Current File: $file"; fi
     if [ ${file: -4} = ".mp4" ]
     then
-      ((increment++))
-      if [ $testing = "true" ]; then echo "Currently on #$increment"; fi
+      ((iteration++))
+      if [ $testing = "true" ]; then echo "Currently on #$iteration"; fi
       sleep $secondstosleep
 
       videolength=1
@@ -47,22 +47,22 @@ do
         if [ $videotrim -gt 60 ]
         then
           echo "Unable to trim videos longer than 60 seconds"
-          cp $file $outputfolder$increment-trimmed.mp4
+          cp $file $outputfolder$iteration-trimmed.mp4
       else
-          ffmpeg -y -ss 00:00:$videotrim -i $file -c:v copy -c:a copy $outputfolder$increment-trimmed.mp4
+          ffmpeg -y -ss 00:00:$videotrim -i $file -c:v copy -c:a copy $outputfolder$iteration-trimmed.mp4
         fi
       else
-        cp $file $outputfolder$increment-trimmed.mp4
+        cp $file $outputfolder$iteration-trimmed.mp4
       fi
-      mv $file $outputfolder$increment-original.mp4
-      ffmpeg -y -i $outputfolder$increment-trimmed.mp4 -filter:v "setpts=$slowdownspeed*PTS" -an $outputfolder$increment.mp4
+      mv $file $outputfolder$iteration-original.mp4
+      ffmpeg -y -i $outputfolder$iteration-trimmed.mp4 -filter:v "setpts=$slowdownspeed*PTS" -an $outputfolder$iteration.mp4
       curl "http://$pro7ipaddress:$pro7port/v1/presentation/focused/next/trigger"
-      open -a VLC "$outputfolder$increment.mp4"
+      open -a VLC "$outputfolder$iteration.mp4"
       sleep $endvideolength
       sleep 1
       curl "http://$pro7ipaddress:$pro7port/v1/presentation/focused/previous/trigger"
-      echo "Finished #$increment"
-      echo $increment > "${outputfolder}latest"
+      echo "Finished #$iteration"
+      echo $iteration > "${outputfolder}latest"
     fi
   done
 done
