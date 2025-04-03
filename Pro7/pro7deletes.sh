@@ -25,6 +25,7 @@ do
           directory=${mv_path%/*}
           mkdir -p "$directory"
           mv -f "$local_item" "$mv_path"
+          rm -rf "$local_item"
           rm -rf "$sync_item"
           echo "Removed: $line"
         fi
