@@ -19,7 +19,6 @@ do
         mv_path="${HOME}/Sync/ProPresenter_Shared_Content/Deletes/$area/$line"
 
         if [[ -d "$local_item" ]] || [[ -f "$local_item" ]]; then exists="yes"; fi
-
         if [[ $exists == "yes" ]]
         then
           directory=${mv_path%/*}
@@ -27,6 +26,13 @@ do
           mv -f "$local_item" "$mv_path"
           rm -rf "$local_item"
           rm -rf "$sync_item"
+          echo "Removed: $line"
+        fi
+
+        if [[ "$line" == *"*"* ]]
+        then
+          rm -f $local_item
+          rm -f $sync_item
           echo "Removed: $line"
         fi
       fi
